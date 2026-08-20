@@ -2,17 +2,22 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "..", "data", "processed")
+
 st.set_page_config(page_title="NorthBay Living - Demand & Inventory Dashboard", layout="wide")
 
 @st.cache_data
 def load_data():
-    weekly = pd.read_csv("../data/processed/weekly_demand.csv")
+    weekly = pd.read_csv(os.path.join(DATA_DIR, "weekly_demand.csv"))
     weekly["Week"] = pd.to_datetime(weekly["Week"])
 
-    backtest = pd.read_csv("../data/processed/backtest_predictions.csv")
+    backtest = pd.read_csv(os.path.join(DATA_DIR, "backtest_predictions.csv"))
     backtest["Week"] = pd.to_datetime(backtest["Week"])
 
-    risk = pd.read_csv("../data/processed/latest_risk_scores.csv")
+    risk = pd.read_csv(os.path.join(DATA_DIR, "latest_risk_scores.csv"))
 
     return weekly, backtest, risk
 
