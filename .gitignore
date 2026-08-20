@@ -1,5 +1,4 @@
 data/raw/*.csv
-data/processed/*.csv
 models/*.pkl
 *.pkl
 __pycache__/
